@@ -1,3 +1,13 @@
+import sys
+import subprocess
+
+
+try:
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'python_dependencies.txt'])
+except Exception as e:
+    raise Exception(f'Failed to install package. Exception [{str(e)}]')
+
+
 import re
 import json
 import traceback
@@ -7,6 +17,7 @@ from integration_error import IntegrationError
 from jsonschema import validate
 from auth_data import OnevizionAuth, AwsAuth
 from message_trackor_settings_parser import MessageTrackorSettingsParser
+
 
 with open('settings.json', "rb") as PFile:
     settings_data = json.loads(PFile.read().decode('utf-8'))
